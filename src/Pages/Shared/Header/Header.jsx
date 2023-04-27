@@ -3,7 +3,7 @@ import logo from "../../../assets/logo.png"
 import moment from 'moment';
 import { Button, Container } from 'react-bootstrap';
 import Marquee from "react-fast-marquee";
-import NavBar from './NavBar';
+
 
 const Header = () => {
     return (
@@ -24,7 +24,6 @@ const Header = () => {
                     </Marquee>
                 </div>
             </div>
-            <NavBar />
         </Container>
     );
 };

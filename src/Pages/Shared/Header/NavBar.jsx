@@ -3,26 +3,39 @@ import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-
+import { Link } from 'react-router-dom';
+import { useDataGlobally } from '../../../Context/Context';
+import { FaUserCircle } from 'react-icons/fa';
 
 const NavBar = () => {
+
+    const { user } = useDataGlobally()
+
+
     return (
-        <div>
+        <div className='mb-5'>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
                 <Container>
-                    
+
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
+                    <Navbar.Collapse id="responsive-navbar-nav " className='d-flex align-items-center'>
                         <Nav className="mx-auto">
-                            <Nav.Link href="#features">Home</Nav.Link>
+                            <Link to="/category/0">Home</Link>
                             <Nav.Link href="#pricing">About</Nav.Link>
                             <Nav.Link href="#pricing">Career</Nav.Link>
                         </Nav>
-                        <Nav style={{display:"flex" , alignItems:"center"}}>
-                            <Nav.Link href="#deets">Profile</Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
-                                <Button variant="dark">Login</Button>
-                            </Nav.Link>
+                        <Nav style={{ display: "flex", alignItems: "center" }}>
+                            {user && <Nav.Link href="#deets">
+                                <FaUserCircle style={{ fontSize: "2rem" }} />
+                            </Nav.Link>}
+
+                            {user ?
+                                <Button variant="dark">LogOut</Button> :
+                                <Link to="/login">
+                                    <Button variant="dark">Login</Button>
+                                </Link>
+                            }
+
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
