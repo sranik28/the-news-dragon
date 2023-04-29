@@ -45,7 +45,7 @@ const Router = createBrowserRouter([
         ]
     },
     {
-        path: "news",
+        path: "/news",
         element: <News />,
         children: [
             {
