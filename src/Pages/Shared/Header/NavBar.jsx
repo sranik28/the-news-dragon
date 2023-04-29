@@ -9,7 +9,18 @@ import { FaUserCircle } from 'react-icons/fa';
 
 const NavBar = () => {
 
-    const { user } = useDataGlobally()
+    const { user, logOut } = useDataGlobally();
+
+    const handelLogOut = () => {
+        logOut()
+            .then(result => {
+                const log = result.user;
+                console.log(log)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
 
     return (
@@ -30,7 +41,7 @@ const NavBar = () => {
                             </Nav.Link>}
 
                             {user ?
-                                <Button variant="dark">LogOut</Button> :
+                                <Button onClick={handelLogOut} variant="dark">LogOut</Button> :
                                 <Link to="/login">
                                     <Button variant="dark">Login</Button>
                                 </Link>

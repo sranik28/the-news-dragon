@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDataGlobally } from '../../Context/Context';
 
 const Login = () => {
 
     const { signInUser } = useDataGlobally();
+    const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location)
+    const from = location.state?.from?.pathname || "category/0"
 
     const [error, setError] = useState("");
 
@@ -18,6 +22,7 @@ const Login = () => {
             .then(result => {
                 const logged = result.user;
                 console.log(logged)
+                navigate(from, { replace: true })
 
             })
             .catch(error => {

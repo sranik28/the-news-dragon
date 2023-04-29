@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useDataGlobally } from '../../Context/Context';
@@ -6,6 +6,7 @@ import { useDataGlobally } from '../../Context/Context';
 const Register = () => {
 
     const { createUser } = useDataGlobally();
+    const [accept, setAccept] = useState(false);
 
     const RegFormHandle = (e) => {
         e.preventDefault();
@@ -24,6 +25,10 @@ const Register = () => {
             .catch(error => {
                 console.log(error)
             })
+    }
+
+    const checkedHandel = (e) => {
+        setAccept(e.target.checked)
     }
 
     return (
@@ -51,10 +56,14 @@ const Register = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" name="accept" label="Accept Term & Conditions" />
+                    <Form.Check
+                        onClick={checkedHandel}
+                        type="checkbox"
+                        name="accept"
+                        label={<>Accept <Link to="/terms">Term & Conditions</Link></>} />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" disabled={!accept} type="submit">
                     Register
                 </Button>
                 <Form.Text> <br />
