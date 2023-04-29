@@ -6,7 +6,8 @@ import { FiBookmark } from 'react-icons/fi';
 import { BiShareAlt } from 'react-icons/bi';
 import { AiOutlineEye, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 
-import Rating from 'react-rating';
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 
 const NewsCard = ({ news }) => {
     console.log(news)
@@ -34,14 +35,11 @@ const NewsCard = ({ news }) => {
                 </Card.Text>
             </Card.Body>
             <Card.Footer className="text-muted d-flex">
-                <div className='flex-grow-1'>
+                <div className='flex-grow-1 d-flex align-items-center gap-2'>
                     <Rating
-                        placeholderRating={rating?.number}
-                        readonly
-                        emptySymbol={<AiOutlineStar />}
-                        placeholderSymbol={<AiFillStar className='text-warning'/>}
-                        fullSymbol={<AiFillStar />}
-                    ></Rating>
+                        style={{ maxWidth: 100 }}
+                        value={Math.round(rating?.number || 0)}
+                        readOnly />
                     <span>{rating?.number}</span>
                 </div>
                 <div>
